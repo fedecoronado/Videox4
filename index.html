@@ -112,12 +112,14 @@
                 const muteValue = i + 1 === index ? 1 : 0;
                 const src = `${iframe.getAttribute('src').split('?')[0]}?autoplay=1&mute=${muteValue}`;
                 iframe.setAttribute('src', src);
+                iframe.src = iframe.src; // Esto fuerza la recarga del iframe con su URL actual;
             });
         }
 
         function resetVideo(title) {
             // Puedes implementar lógica adicional aquí si es necesario cuando se produce el mouseout
         }
+
     </script>
 </body>
 
