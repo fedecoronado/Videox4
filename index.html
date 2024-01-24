@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,58 +11,109 @@
             flex-wrap: wrap;
             gap: 3px;
             height: 100vh;
-        } 
+            position: relative;
+        }
 
         .video-container div {
             width: calc(49vw - 5px);
             min-width: 250px;
             height: 50vh;
+            position: relative;
         }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .overlay:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .overlay p {
+            color: white;
+            font-size: 18px;
+        }
+
         .video-container div iframe {
             width: 100%;
             height: 100%;
-
         }
     </style>
 </head>
+
 <body>
     <div class="video-container">
         <div>
-            <iframe  
+            <div class="overlay" onmouseover="changeVideo('LN+ EN VIVO', 1)" onmouseout="resetVideo('LN+ EN VIVO')">
+                <p>LN+ EN VIVO</p>
+            </div>
+            <iframe 
                 src="https://www.youtube.com/embed/LY2XEQ_SSXA?autoplay=1&mute=1" 
-                title="LN+ EN VIVO" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                title="LN+ EN VIVO" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen>
-            </iframe> 
-            
+            </iframe>
         </div>
         <div>
+            <div class="overlay" onmouseover="changeVideo('TN EN VIVO', 2)" onmouseout="resetVideo('TN EN VIVO')">
+                <p>TN EN VIVO</p>
+            </div>
             <iframe 
                 src="https://www.youtube.com/embed/cb12KmMMDJA?autoplay=1&mute=1" 
-                title="TN EN VIVO" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <div>
-            <iframe 
-                src="https://www.youtube.com/embed/QGpHLgRnrx4?autoplay=1&mute=1" 
-                title="A24 EN VIVO " 
-                frameborder="0" 
-                allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-        <div>
-            <iframe 
-                src="https://www.youtube.com/embed/_OAc8-UqXLg?autoplay=1&mute=1" 
-                title="C5N EN VIVO" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                title="TN EN VIVO" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen>
+            </iframe>
+        </div>
+        <div>
+            <div class="overlay" onmouseover="changeVideo('A24 EN VIVO', 3)" onmouseout="resetVideo('A24 EN VIVO')">
+                <p>A24 EN VIVO</p>
+            </div>
+            <iframe 
+                src="https://www.youtube.com/embed/QGpHLgRnrx4?autoplay=1&mute=1" title="A24 EN VIVO" 
+                frameborder="0"
+                allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+                
+            </iframe>
+        </div>
+        <div>
+            <div class="overlay" onmouseover="changeVideo('C5N EN VIVO', 4)" onmouseout="resetVideo('C5N EN VIVO')">
+                <p>C5N EN VIVO</p>
+            </div>
+            <iframe 
+                src="https://www.youtube.com/embed/_OAc8-UqXLg?autoplay=1&mute=1"
+                title="C5N EN VIVO" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+                
             </iframe>
         </div>
     </div>
 
-    
+    <script>
+        function changeVideo(title, index) {
+            const iframes = document.querySelectorAll('.video-container div iframe');
+            iframes.forEach((iframe, i) => {
+                const muteValue = i + 1 === index ? 1 : 0;
+                const src = `https://www.youtube.com/embed/${iframe.getAttribute('src').split('/')[4]}?autoplay=1&mute=${muteValue}`;
+                iframe.setAttribute('src', src);
+            });
+        }
+
+        function resetVideo(title) {
+            // You can implement additional logic here if needed when mouseout occurs
+        }
+    </script>
 </body>
 
 </html>
-
