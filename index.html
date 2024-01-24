@@ -113,10 +113,19 @@
                 const src = `${iframe.getAttribute('src').split('?')[0]}?autoplay=1&mute=${muteValue}`;
                 iframe.setAttribute('src', src);
             });
+
+            updateIframes(); // Llama a la función para actualizar los iframes
         }
 
         function resetVideo(title) {
             // Puedes implementar lógica adicional aquí si es necesario cuando se produce el mouseout
+        }
+
+        function updateIframes() {
+            const iframes = document.querySelectorAll('.video-container div iframe');
+            iframes.forEach((iframe) => {
+                iframe.src = iframe.src; // Esto fuerza la recarga del iframe con su URL actual
+            });
         }
     </script>
 </body>
