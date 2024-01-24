@@ -1,133 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reproductores de YouTube</title>
     <style>
-        body {
-            margin: 0; /* Elimina el margen predeterminado del cuerpo de la página */
-            /*overflow: hidden;  Evita que haya desplazamiento vertical */
-        }
-
         .video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
             display: flex;
             flex-wrap: wrap;
             gap: 3px;
-            height: 50vh; /* Ajuste de la altura del contenedor */
-            z-index: 0; /* Asegura que .video-container esté por debajo de las capas overlay */
-        }
+            height: 100vh;
+        } 
 
         .video-container div {
             width: calc(49vw - 5px);
             min-width: 250px;
             height: 50vh;
-            position: relative;
         }
         .video-container div iframe {
             width: 100%;
             height: 100%;
-            position: relative;
-            z-index: 0; /* Asegura que los iframes estén por encima de las capas overlay */
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 3px;
-            height: 50vh; /* Ajuste de la altura del contenedor */
-            background-color: transparent;
-            z-index: 2; /* Asegura que las capas overlay estén por encima de .video-container pero debajo de los iframes */
-        }
 
-        .overlay-in{
-            width: calc(49vw - 5px);
-            min-width: 250px;
-            height: 50vh;
-            position: relative;
         }
-
-        .overlay-in:hover {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .overlay-in p {
-            color: white;
-            font-size: 18px;
-        }
-
-
     </style>
 </head>
-
 <body>
     <div class="video-container">
         <div>
-            <iframe src="https://www.youtube.com/embed/LY2XEQ_SSXA?autoplay=1&mute=1" title="LN+ EN VIVO" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+            <iframe  
+                src="https://www.youtube.com/embed/LY2XEQ_SSXA?autoplay=1&mute=1" 
+                title="LN+ EN VIVO" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe> 
+            
         </div>
         <div>
-            <iframe src="https://www.youtube.com/embed/cb12KmMMDJA?autoplay=1&mute=1" title="TN EN VIVO" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+            <iframe 
+                src="https://www.youtube.com/embed/cb12KmMMDJA?autoplay=1&mute=1" 
+                title="TN EN VIVO" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
         <div>
-            <iframe src="https://www.youtube.com/embed/QGpHLgRnrx4?autoplay=1&mute=1" title="A24 EN VIVO" frameborder="0"
-                allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+            <iframe 
+                src="https://www.youtube.com/embed/QGpHLgRnrx4?autoplay=1&mute=1" 
+                title="A24 EN VIVO " 
+                frameborder="0" 
+                allow=" autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
         <div>
-
-            <iframe src="https://www.youtube.com/embed/_OAc8-UqXLg?autoplay=1&mute=1" title="C5N EN VIVO" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-        </div>
-    </div>
-    <div class="overlay">
-        <div class="overlay-in" onmouseover="changeVideo('LN+ EN VIVO', 1)" onmouseout="resetVideo('LN+ EN VIVO')">
-            <p>LN+ EN VIVO</p>
-        </div>
-        <div class="overlay-in" onmouseover="changeVideo('TN EN VIVO', 2)" onmouseout="resetVideo('TN EN VIVO')">
-            <p>TN EN VIVO</p>
-        </div>
-        <div class="overlay-in" onmouseover="changeVideo('A24 EN VIVO', 3)" onmouseout="resetVideo('A24 EN VIVO')">
-            <p>A24 EN VIVO</p>
-        </div>
-        <div class="overlay-in" onmouseover="changeVideo('C5N EN VIVO', 4)" onmouseout="resetVideo('C5N EN VIVO')">
-            <p>C5N EN VIVO</p>
+            <iframe 
+                src="https://www.youtube.com/embed/_OAc8-UqXLg?autoplay=1&mute=1" 
+                title="C5N EN VIVO" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
-    <script>
-        function changeVideo(title, index) {
-            const iframes = document.querySelectorAll('.video-container div iframe');
-            iframes.forEach((iframe, i) => {
-                const muteValue = i + 1 === index ? 1 : 0;
-                const src = `${iframe.getAttribute('src').split('?')[0]}?autoplay=1&mute=${muteValue}`;
-                iframe.setAttribute('src', src);
-            });
-
-            updateIframes(); // Llama a la función para actualizar los iframes
-        }
-
-        function resetVideo(title) {
-            // Puedes implementar lógica adicional aquí si es necesario cuando se produce el mouseout
-        }
-
-        function updateIframes() {
-            const iframes = document.querySelectorAll('.video-container div iframe');
-            iframes.forEach((iframe) => {
-                iframe.src = iframe.src; // Esto fuerza la recarga del iframe con su URL actual
-            });
-        }
-    </script>
+    
 </body>
 
 </html>
